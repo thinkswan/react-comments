@@ -1,0 +1,33 @@
+{
+  "name": "react-comments",
+  "version": "0.0.0",
+  "description": "A React app that allows visitors to post comments",
+  "author": "Graham Swan <thinkswan@gmail.com> (http://grahamswan.com/)",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "main": "server.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/thinkswan/react-comments.git"
+  },
+   "bugs": {
+    "url": "https://github.com/thinkswan/react-comments/issues"
+  },
+  "keywords": [
+    "node",
+    "express",
+    "react",
+    "comments"
+  ],
+  "dependencies": {
+    "body-parser": "^1.12.4",
+    "express": "^4.12.4"
+  },
+  "devDependencies": {},
+  "engines": {
+    "node": "^0.12.4"
+  },
+  "private": true,
+  "license": "MIT"
+}

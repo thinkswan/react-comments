@@ -1,0 +1,15 @@
+{
+  "name": "react-comments",
+  "description": "A React app that allows visitors to post comments",
+  "keywords": [
+    "node",
+    "express",
+    "react",
+    "comments"
+  ],
+  "repository": "https://github.com/thinkswan/react-comments",
+  "success_url": "/",
+  "scripts": {},
+  "env": {},
+  "addons": []
+}

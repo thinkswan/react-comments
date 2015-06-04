@@ -3,37 +3,41 @@
  */
 
 var CommentBox = React.createClass({
+  _makeAjaxCall: function(opts) {
+    $.ajax(opts)
+      .success(function(data) {
+        this.setState({ data: data });
+      }.bind(this))
+      .error(function(xhr, status, err) {
+        console.error(this.props.url, status, err.toString());
+      }.bind(this));
+  },
+
   loadCommentsFromServer: function() {
-    $.ajax({
+    var opts = {
       url: this.props.url,
       dataType: 'json',
-      cache: false,
-      success: function(data) {
-        this.setState({ data: data });
-      }.bind(this),
-      error: function(xhr, status, err) {
-        console.error(this.props.url, status, err.toString());
-      }.bind(this)
-    });
+      cache: false
+    };
+
+    this._makeAjaxCall(opts);
   },
 
   handleCommentSubmit: function(comment) {
+    // Optimistically render the new comment to avoid waiting for the roundtrip
+    // to the server
     var comments = this.state.data;
     var newComments = comments.concat([comment]);
     this.setState({ data: newComments });
 
-    $.ajax({
+    var opts = {
       url: this.props.url,
       dataType: 'json',
       type: 'POST',
-      data: comment,
-      success: function(data) {
-        this.setState({ data: data });
-      }.bind(this),
-      error: function(xhr, status, err) {
-        console.error(this.props.url, status, err.toString());
-      }.bind(this)
-    });
+      data: comment
+    };
+
+    this._makeAjaxCall(opts);
   },
 
   getInitialState: function() {
@@ -109,8 +113,10 @@ var CommentForm = React.createClass({
   handleSubmit: function(e) {
     e.preventDefault();
 
-    var author = React.findDOMNode(this.refs.author).value.trim();
-    var text = React.findDOMNode(this.refs.text).value.trim();
+    var authorField = React.findDOMNode(this.refs.author);
+    var textField = React.findDOMNode(this.refs.text);
+    var author = authorField.value.trim();
+    var text = textField.value.trim();
 
     if (!text || !author) {
       return;
@@ -118,8 +124,8 @@ var CommentForm = React.createClass({
 
     this.props.onCommentSubmit({ author: author, text: text });
 
-    React.findDOMNode(this.refs.author).value = '';
-    React.findDOMNode(this.refs.text).value = '';
+    authorField.value = '';
+    textField.value = '';
 
     return;
   },

@@ -2,7 +2,7 @@
   "name": "react-comments",
   "version": "0.0.0",
   "description": "A React app that allows visitors to post comments",
-  "author": "Graham Swan <thinkswan@gmail.com> (http://grahamswan.com/)",
+  "author": "Graham Swan <thinkswan@gmail.com>",
   "scripts": {
     "start": "node server.js"
   },
@@ -11,9 +11,7 @@
     "type": "git",
     "url": "https://github.com/thinkswan/react-comments.git"
   },
-   "bugs": {
-    "url": "https://github.com/thinkswan/react-comments/issues"
-  },
+  "bugs": {},
   "keywords": [
     "node",
     "express",
